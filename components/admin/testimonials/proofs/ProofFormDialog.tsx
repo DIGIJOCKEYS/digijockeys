@@ -28,7 +28,11 @@ export interface ProofFormData {
   serviceId: string;
 }
 
-export interface ProofService { id: string; name: string; category: string }
+export interface ProofService {
+  id: string;
+  name: string;
+  category: string;
+}
 
 interface ProofFormDialogProps {
   open: boolean;
@@ -74,7 +78,11 @@ export default function ProofFormDialog({ open, onOpenChange, onSubmit, initialD
 
   useEffect(() => {
     if (open) {
-      const timer = window.setTimeout(() => { setForm(initialData ? { ...initialData } : { ...emptyForm }); setImageError(''); if (fileInputRef.current) fileInputRef.current.value = ''; }, 0);
+      const timer = window.setTimeout(() => {
+        setForm(initialData ? { ...initialData } : { ...emptyForm });
+        setImageError('');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      }, 0);
       return () => window.clearTimeout(timer);
     }
   }, [open, initialData]);
@@ -114,10 +122,22 @@ export default function ProofFormDialog({ open, onOpenChange, onSubmit, initialD
     try {
       const compressed = await compressImage(file);
       const reader = new FileReader();
-      reader.onload = () => { if (typeof reader.result === 'string') { updateField('image', reader.result); setImageError(''); } setIsPreparing(false); };
-      reader.onerror = () => { setImageError('Failed to read the compressed image.'); setIsPreparing(false); };
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          updateField('image', reader.result);
+          setImageError('');
+        }
+        setIsPreparing(false);
+      };
+      reader.onerror = () => {
+        setImageError('Failed to read the compressed image.');
+        setIsPreparing(false);
+      };
       reader.readAsDataURL(compressed);
-    } catch (cause) { setImageError(cause instanceof Error ? cause.message : 'Failed to prepare image.'); setIsPreparing(false); }
+    } catch (cause) {
+      setImageError(cause instanceof Error ? cause.message : 'Failed to prepare image.');
+      setIsPreparing(false);
+    }
   };
 
   // ==========================================
@@ -196,7 +216,11 @@ export default function ProofFormDialog({ open, onOpenChange, onSubmit, initialD
             <Label htmlFor="proof-service">Service Category</Label>
             <select id="proof-service" value={form.serviceId} onChange={(event) => updateField('serviceId', event.target.value)} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
               <option value="">No service assigned</option>
-              {services.map((service) => <option key={service.id} value={service.id}>{service.category} — {service.name}</option>)}
+              {services.map((service) => (
+                <option key={service.id} value={service.id}>
+                  {service.category} — {service.name}
+                </option>
+              ))}
             </select>
             {services.length === 0 && <p className="text-xs text-destructive">Create an active service before uploading a proof.</p>}
           </div>
@@ -269,7 +293,11 @@ export default function ProofFormDialog({ open, onOpenChange, onSubmit, initialD
             )}
 
             {imageError && <p className="text-xs text-destructive">{imageError}</p>}
-            {isPreparing && <p role="status" className="text-xs text-primary">Compressing image before upload…</p>}
+            {isPreparing && (
+              <p role="status" className="text-xs text-primary">
+                Compressing image before upload…
+              </p>
+            )}
           </div>
 
           {/* DESCRIPTION */}
@@ -297,13 +325,6 @@ export default function ProofFormDialog({ open, onOpenChange, onSubmit, initialD
             </select>
 
             <p className="text-xs text-muted-foreground">Published proofs can be displayed on your public website.</p>
-          </div>
-
-          {/* PRIVACY REMINDER */}
-          <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Before publishing, make sure you have permission to share the screenshot. Hide private information such as phone numbers, account numbers, addresses, and personal details.
-            </p>
           </div>
 
           {/* FOOTER */}

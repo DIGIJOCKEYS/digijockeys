@@ -58,10 +58,7 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                     unoptimized
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80"
-                  />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
 
                   {/* Service badge */}
                   <div className="absolute left-4 top-4">
@@ -85,15 +82,13 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                         <span>{formattedDate}</span>
                       </div>
                     )}
-                    <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-foreground/85">
-                      {proof.description || `Dokumentasi bukti serah terima dan pengerjaan ${serviceName} terverifikasi.`}
-                    </p>
+                    <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-foreground/85">{proof.description || `Bukti Bayar ${serviceName}.`}</p>
                   </div>
 
                   <div className="mt-5 flex items-center justify-between border-t border-border/60 pt-4 text-xs font-semibold text-primary">
                     <span className="flex items-center gap-1.5">
                       <ShieldCheck className="size-4 text-emerald-600 dark:text-emerald-400" />
-                      Bukti Terverifikasi
+                      Bukti
                     </span>
                     <span className="flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                       Lihat Detail <ArrowUpRight className="size-3.5" />
@@ -118,7 +113,8 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                   </Badge>
                   {selectedProof.proof_date && (
                     <span className="text-xs text-muted-foreground">
-                      Diselesaikan pada {new Date(`${selectedProof.proof_date}T00:00:00`).toLocaleDateString('id-ID', {
+                      Diselesaikan pada{' '}
+                      {new Date(`${selectedProof.proof_date}T00:00:00`).toLocaleDateString('id-ID', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
@@ -126,12 +122,8 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                     </span>
                   )}
                 </div>
-                <DialogTitle className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                  Detail Bukti Pengerjaan
-                </DialogTitle>
-                <DialogDescription className="text-sm text-muted-foreground">
-                  Dokumentasi langsung dari hasil kerja dan serah terima proyek pelanggan DigiJockeys. Klik gambar untuk melihat layar penuh.
-                </DialogDescription>
+                <DialogTitle className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Detail Bukti Pengerjaan</DialogTitle>
+                <DialogDescription className="text-sm text-muted-foreground">Dokumentasi langsung dari hasil kerja dan serah terima proyek pelanggan DigiJockeys. Klik gambar untuk melihat layar penuh.</DialogDescription>
               </DialogHeader>
 
               {/* Large Image Preview with Click-to-Fullscreen */}
@@ -171,18 +163,10 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
 
               {/* CTA in Dialog */}
               <div className="mt-6 flex flex-wrap items-center justify-end gap-3 border-t border-border/60 pt-5">
-                <Button
-                  variant="outline"
-                  className="rounded-xl text-xs"
-                  onClick={() => setSelectedProof(null)}
-                >
+                <Button variant="outline" className="rounded-xl text-xs" onClick={() => setSelectedProof(null)}>
                   Tutup
                 </Button>
-                <Button
-                  render={<Link href="/contact" />}
-                  className="rounded-xl bg-primary text-xs font-semibold text-primary-foreground hover:bg-primary/95"
-                  onClick={() => setSelectedProof(null)}
-                >
+                <Button render={<Link href="/contact" />} className="rounded-xl bg-primary text-xs font-semibold text-primary-foreground hover:bg-primary/95" onClick={() => setSelectedProof(null)}>
                   Konsultasikan Proyek Serupa
                   <ArrowUpRight className="size-4" />
                 </Button>
@@ -193,12 +177,7 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
       </Dialog>
 
       {/* Fullscreen Lightbox Modal */}
-      <ImageLightboxModal
-        isOpen={!!fullscreenImage}
-        onClose={() => setFullscreenImage(null)}
-        src={fullscreenImage}
-        alt="Bukti Pengerjaan Layar Penuh"
-      />
+      <ImageLightboxModal isOpen={!!fullscreenImage} onClose={() => setFullscreenImage(null)} src={fullscreenImage} alt="Bukti Pengerjaan Layar Penuh" />
     </>
   );
 }

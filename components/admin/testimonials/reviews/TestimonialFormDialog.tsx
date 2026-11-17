@@ -38,7 +38,7 @@ interface TestimonialFormDialogProps {
 
 const emptyForm: TestimonialFormData = {
   name: '',
-  service: 'Web Development',
+  service: '',
   rating: 5,
   message: '',
   status: 'Draft',
@@ -51,7 +51,7 @@ const services = ['Web Development', 'UI/UX Design', 'Graphic Design', 'Branding
 // ==========================================
 
 export default function TestimonialFormDialog({ open, onOpenChange, onSubmit, initialData, saving = false }: TestimonialFormDialogProps) {
-  const [form, setForm] = useState<TestimonialFormData>(() => initialData ? { ...initialData } : { ...emptyForm });
+  const [form, setForm] = useState<TestimonialFormData>(() => (initialData ? { ...initialData } : { ...emptyForm }));
 
   const updateField = <K extends keyof TestimonialFormData>(key: K, value: TestimonialFormData[K]) => {
     setForm((current) => ({
@@ -117,16 +117,7 @@ export default function TestimonialFormDialog({ open, onOpenChange, onSubmit, in
             <Label htmlFor="testimonial-rating">Rating</Label>
 
             <div className="flex items-center gap-3">
-              <Input
-                id="testimonial-rating"
-                type="number"
-                min={1}
-                max={5}
-                value={form.rating}
-                readOnly
-                className="w-24"
-                required
-              />
+              <Input id="testimonial-rating" type="number" min={1} max={5} value={form.rating} readOnly className="w-24" required />
 
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }, (_, index) => (
@@ -155,7 +146,9 @@ export default function TestimonialFormDialog({ open, onOpenChange, onSubmit, in
               onChange={(event) => updateField('status', event.target.value as TestimonialStatus)}
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
             >
-              <option value="Draft" disabled={initialData?.status === 'Published'}>Draft</option>
+              <option value="Draft" disabled={initialData?.status === 'Published'}>
+                Draft
+              </option>
               <option value="Published">Published</option>
             </select>
           </div>

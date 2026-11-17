@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { BriefcaseBusiness, Eye, FolderKanban, MessageSquareQuote, Plus, ArrowUpRight } from 'lucide-react';
+import { BriefcaseBusiness, FolderKanban, MessageSquareQuote, Plus, ArrowUpRight } from 'lucide-react';
 
 import PageHeader from '@/components/shared/PageHeader';
 
@@ -32,12 +32,6 @@ const statisticDefaults = [
     description: 'Customer testimonials',
     icon: MessageSquareQuote,
   },
-  {
-    title: 'Total Views',
-    value: '1,284',
-    description: 'Portfolio page views',
-    icon: Eye,
-  },
 ];
 
 const recentProjects: { id: string; name: string; category: string; status: string; date: string }[] = [];
@@ -65,7 +59,7 @@ export default function DashboardPage() {
         db.from('portfolio_projects').select('id, project_name, category, status, updated_at').order('updated_at', { ascending: false }).limit(4),
         db.from('testimonials').select('id', { count: 'exact', head: true }),
       ]);
-      setStatistics((current) => current.map((item) => ({ ...item, value: item.title === 'Total Services' ? String(services.count ?? 0) : item.title === 'Portfolio Projects' ? String(portfolio.data?.length ?? 0) : item.title === 'Testimonials' ? String(reviews.count ?? 0) : '—' })));
+      setStatistics((current) => current.map((item) => ({ ...item, value: item.title === 'Total Services' ? String(services.count ?? 0) : item.title === 'Portfolio Projects' ? String(portfolio.data?.length ?? 0) : String(reviews.count ?? 0) })));
       setProjects((portfolio.data ?? []).map((p) => ({ id: p.id, name: p.project_name, category: p.category, status: p.status === 'published' ? 'Published' : 'Draft', date: new Date(p.updated_at).toLocaleDateString() })));
     })();
   }, []);
@@ -84,7 +78,7 @@ export default function DashboardPage() {
       />
 
       {/* Statistics */}
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {statistics.map((item) => {
           const Icon = item.icon;
 

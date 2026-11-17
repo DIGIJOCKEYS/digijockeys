@@ -83,7 +83,15 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
   useEffect(() => {
     const db = createClient();
     const load = async () => {
-      const { data, error } = await db.from('notifications').select('id,title,message,link,created_at,type,is_read').order('created_at', { ascending: false }).limit(30);
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Jakarta',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }).formatToParts(new Date());
+      const datePart = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value;
+      const todayStart = new Date(`${datePart('year')}-${datePart('month')}-${datePart('day')}T00:00:00+07:00`).toISOString();
+      const { data, error } = await db.from('notifications').select('id,title,message,link,created_at,type,is_read').gte('created_at', todayStart).order('created_at', { ascending: false }).limit(30);
       if (error) { console.error('Unable to load notifications:', error.message); return; }
       setNotifications((data ?? []) as Notification[]);
     };
@@ -108,8 +116,10 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
   };
 
   const markAllAsRead = async () => {
+    const unreadIds = notifications.filter((item) => !item.is_read).map((item) => item.id);
+    if (!unreadIds.length) return;
     setNotifications((current) => current.map((item) => ({ ...item, is_read: true })));
-    const { error } = await createClient().from('notifications').update({ is_read: true }).eq('is_read', false);
+    const { error } = await createClient().from('notifications').update({ is_read: true }).in('id', unreadIds);
     if (error) console.error('Unable to mark notifications as read:', error.message);
   };
 

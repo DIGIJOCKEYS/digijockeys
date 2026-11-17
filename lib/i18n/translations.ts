@@ -44,14 +44,6 @@ export const idTranslations: Record<string, string> = Object.fromEntries([
     "Testimoni pelanggan"
   ],
   [
-    "Total Views",
-    "Total Tayangan"
-  ],
-  [
-    "Portfolio page views",
-    "Tayangan halaman portofolio"
-  ],
-  [
     "Recent Projects",
     "Proyek Terbaru"
   ],

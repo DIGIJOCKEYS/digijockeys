@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { LoaderCircle, Star } from 'lucide-react';
+import { CheckCircle2, LoaderCircle, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -21,6 +22,7 @@ export default function TestimonialForm({ services }: { services: ServiceOption[
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [messageIsError, setMessageIsError] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,7 +49,7 @@ export default function TestimonialForm({ services }: { services: ServiceOption[
       setRating(0);
       setDescription('');
       setMessageIsError(false);
-      setMessage('Terima kasih! Ulasan Anda menunggu persetujuan admin sebelum ditampilkan.');
+      setSuccessOpen(true);
     } catch {
       setMessageIsError(true);
       setMessage('Ulasan belum terkirim. Silakan periksa koneksi lalu coba lagi.');
@@ -57,6 +59,7 @@ export default function TestimonialForm({ services }: { services: ServiceOption[
   }
 
   return (
+    <>
     <form onSubmit={submit} className="grid gap-5">
       <div className="grid gap-2">
         <Label htmlFor="review-name">Nama</Label>
@@ -113,5 +116,18 @@ export default function TestimonialForm({ services }: { services: ServiceOption[
       </Button>
       {message && <p role={messageIsError ? 'alert' : 'status'} className={`rounded-xl border px-4 py-3 text-sm leading-6 ${messageIsError ? 'border-destructive/20 bg-destructive/5 text-destructive' : 'border-primary/15 bg-primary/5 text-foreground'}`}>{message}</p>}
     </form>
+    <AlertDialog open={successOpen} onOpenChange={setSuccessOpen}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <div className="mb-2 flex size-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600"><CheckCircle2 className="size-6" /></div>
+          <AlertDialogTitle>Testimoni berhasil dikirim</AlertDialogTitle>
+          <AlertDialogDescription>Terima kasih sudah berbagi pengalaman. Testimoni Anda akan ditinjau admin sebelum ditampilkan di website.</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction onClick={() => setSuccessOpen(false)}>Mengerti</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+    </>
   );
 }
