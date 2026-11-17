@@ -1,28 +1,35 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { Suspense } from 'react';
-import { ArrowRight } from 'lucide-react';
 import Navbar from '@/components/website/layout/Navbar';
 import Footer from '@/components/website/layout/Footer';
 import WhatsAppButton from '@/components/website/layout/WhatsAppButton';
 import HeroSection from '@/components/website/sections/HeroSection';
 import AboutSection from '@/components/website/sections/AboutSection';
 import ServicesSection from '@/components/website/sections/ServicesSection';
+import WhyChooseUsSection from '@/components/website/sections/WhyChooseUsSection';
+import WorkProcessSection from '@/components/website/sections/WorkProcessSection';
 import PortfolioSection from '@/components/website/sections/PortfolioSection';
 import TestimonialsSection from '@/components/website/sections/TestimonialsSection';
-import { ProofCards, SectionHeading } from '@/components/website/sections/ContentSections';
+import HomeProofsSection from '@/components/website/sections/HomeProofsSection';
+import FAQSection from '@/components/website/sections/FAQSection';
 import CTASection from '@/components/website/sections/CTASection';
-import { Button } from '@/components/ui/button';
 import { getProjects, getProofs, getServices, getSiteSettings, getTestimonials } from '@/lib/supabase/public-data';
-import { Reveal } from '@/components/website/Motion';
 
 export const metadata: Metadata = {
-  title: 'DigiJockeys — Studio Kreatif Digital untuk Bisnis Bertumbuh',
-  description: 'DigiJockeys membantu bisnis membangun website, identitas visual, dan pengalaman digital melalui strategi, desain, dan teknologi yang terarah.',
-  keywords: ['jasa pembuatan website', 'studio kreatif digital', 'desain website', 'digital branding', 'DigiJockeys'],
+  title: 'DIGI JOCKEYS — Digital Creative & Academic Solutions',
+  description: 'Digijockeys hadir membantu kebutuhan digital, kreatif, dan akademik melalui solusi yang dirancang secara profesional, praktis, dan sesuai kebutuhan Anda.',
+  keywords: [
+    'jasa pembuatan website',
+    'desain grafis',
+    'bimbingan skripsi',
+    'pendampingan thesis',
+    'analisis data',
+    'studio kreatif digital',
+    'DigiJockeys',
+  ],
   openGraph: {
-    title: 'DigiJockeys — Studio Kreatif Digital',
-    description: 'Strategi, desain, dan teknologi untuk bisnis yang ingin tampil lebih meyakinkan.',
+    title: 'DIGI JOCKEYS — Digital Creative & Academic Solutions',
+    description: 'Solusi digital, kreatif, dan akademik dalam satu tempat.',
     type: 'website',
   },
 };
@@ -40,31 +47,34 @@ async function HomeContent() {
     <>
       <Navbar settings={settings} />
       <main id="main-content" className="website-motion">
+        {/* 01. HERO SECTION */}
         <HeroSection />
+
+        {/* 02. ABOUT SECTION */}
         <AboutSection />
+
+        {/* 03. SERVICES SECTION */}
         <ServicesSection services={services} preview />
+
+        {/* 04. WHY CHOOSE US */}
+        <WhyChooseUsSection />
+
+        {/* 05. WORK PROCESS */}
+        <WorkProcessSection />
+
+        {/* 06. PORTFOLIO SECTION */}
         <PortfolioSection projects={projects} />
+
+        {/* 07. TESTIMONIAL SECTION (with infinite horizontal marquee from DB) */}
         <TestimonialsSection reviews={reviews} />
 
-        {proofs.length > 0 && (
-          <section className="relative isolate overflow-hidden bg-gradient-to-b from-muted/20 via-muted/35 to-muted/20 px-4 py-20 sm:px-6 sm:py-28">
-            <div aria-hidden="true" className="pointer-events-none absolute -right-48 top-0 -z-10 size-[30rem] rounded-full bg-primary/10 blur-[110px]" />
-            <div className="mx-auto max-w-7xl">
-              <SectionHeading
-                eyebrow="Dokumentasi terpilih"
-                title="Proses dan hasil yang bisa dilihat."
-                text="Beberapa dokumentasi kerja yang telah dipublikasikan."
-              />
-              <ProofCards proofs={proofs.slice(0, 3)} />
-              <Reveal className="mt-8 text-center">
-                <Button render={<Link href="/contact" />} variant="outline" className="rounded-xl border-border/70 bg-background/45 backdrop-blur-md hover:bg-background/80">
-                  Tanyakan tentang proyek serupa <ArrowRight />
-                </Button>
-              </Reveal>
-            </div>
-          </section>
-        )}
+        {/* BUKTI TESTIMONI / DOKUMENTASI PROOFS DARI DATABASE */}
+        <HomeProofsSection proofs={proofs} />
 
+        {/* 08. FAQ SECTION */}
+        <FAQSection />
+
+        {/* 09. FINAL CTA */}
         <CTASection settings={settings} />
       </main>
       <Footer settings={settings} />

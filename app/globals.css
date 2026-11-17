@@ -25,7 +25,6 @@
   /* Surface */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
@@ -93,15 +92,15 @@
   --brand-accent: #39766d;
 
   /* Background */
-  --background: #e8e8e8;
+  --background: #f4f6f5;
   --foreground: #172322;
 
   /* Card */
-  --card: #f7f8f7;
+  --card: #ffffff;
   --card-foreground: #172322;
 
   /* Popover */
-  --popover: #f7f8f7;
+  --popover: #ffffff;
   --popover-foreground: #172322;
 
   /* Primary */
@@ -234,11 +233,15 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 }
 
 body {
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -259,18 +262,22 @@ button {
   cursor: pointer;
 }
 
-.website-motion :where(a, button, [role="button"], [data-slot="card"]) {
-  transition-duration: 320ms;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 ::selection {
   background: var(--brand);
   color: #ffffff;
 }
 
 /* =========================================
-   5. GLASSMORPHISM UTILITIES
+   5. GLOBAL INTERACTIONS
+========================================= */
+
+.website-motion :where(a, button, [role="button"], [data-slot="card"]) {
+  transition-duration: 320ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================
+   6. GLASSMORPHISM UTILITIES
 ========================================= */
 
 .glass-panel {
@@ -282,13 +289,27 @@ button {
 }
 
 /* =========================================
-   6. ANIMATIONS
+   7. HERO ANIMATIONS
 ========================================= */
 
+/* Hero Glow */
 .hero-glow {
   animation: hero-glow 9s ease-in-out infinite alternate;
 }
 
+@keyframes hero-glow {
+  from {
+    opacity: 0.65;
+    scale: 0.96;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1.04;
+  }
+}
+
+/* Hero Orbit */
 .hero-orbit {
   animation: hero-orbit 22s ease-in-out infinite alternate;
 }
@@ -297,33 +318,76 @@ button {
   animation-delay: -11s;
 }
 
-@keyframes hero-glow {
-  from { opacity: 0.65; scale: 0.96; }
-  to { opacity: 1; scale: 1.04; }
-}
-
 @keyframes hero-orbit {
-  from { rotate: -8deg; scale: 0.98; }
-  to { rotate: 8deg; scale: 1.02; }
+  from {
+    rotate: -8deg;
+    scale: 0.98;
+  }
+
+  to {
+    rotate: 8deg;
+    scale: 1.02;
+  }
 }
 
 /* =========================================
-   7. ACCESSIBILITY
+   8. TESTIMONIAL INTERACTIONS
+========================================= */
+
+/*
+  Testimonial carousel menggunakan JavaScript
+  requestAnimationFrame untuk:
+  - Infinite horizontal scrolling
+  - Pause ketika mouse hover
+  - Drag menggunakan mouse
+  - Swipe menggunakan touch
+*/
+
+/* Horizontal drag support */
+.testimonial-viewport {
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.testimonial-viewport:active {
+  cursor: grabbing;
+}
+
+.testimonial-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.testimonial-group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* =========================================
+   9. ACCESSIBILITY
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html {
     scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+  }
+
+  .hero-glow,
+  .hero-orbit {
+    animation: none !important;
+  }
+
+  .website-motion :where(a, button, [role="button"], [data-slot="card"]) {
     transition-duration: 0.01ms !important;
   }
 }
 
 /* =========================================
-   8. SHADCN BASE STYLES
+   10. SHADCN BASE STYLES
 ========================================= */
 
 @layer base {

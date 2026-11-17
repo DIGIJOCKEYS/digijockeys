@@ -24,6 +24,8 @@ export const defaultSettings: SiteSettings = {
   email: null, phone_number: null, whatsapp: null, instagram: null,
 };
 
+export { extractServiceName } from './client-utils';
+
 function mediaUrl(path: string | null) {
   if (!path) return null;
   if (/^(https?:)?\/\//i.test(path) || path.startsWith('/')) return path;
