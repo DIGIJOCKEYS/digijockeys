@@ -1,15 +1,17 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, MessageSquareCheck, SlidersHorizontal, Sparkles, Target, Users } from 'lucide-react';
 import { PageIntro, SectionHeading } from '@/components/website/sections/ContentSections';
 import { Reveal } from '@/components/website/Motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Tentang Kami | DigiJockeys Studio',
-  description: 'Kenali DigiJockeys, digital creative studio yang menyediakan layanan teknologi, desain kreatif, dan pendampingan akademik.',
-};
+export const metadata = pageMetadata({
+  title: 'Tentang Kami',
+  description: 'Kenali DigiJockeys, studio digital kreatif yang membantu bisnis, individu, dan mahasiswa melalui layanan teknologi, desain, serta pendampingan akademik.',
+  path: '/about',
+  keywords: ['tentang DigiJockeys', 'studio digital kreatif', 'layanan digital Indonesia'],
+});
 
 const pillars = [
   {

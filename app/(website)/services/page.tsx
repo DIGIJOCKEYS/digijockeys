@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,12 +6,14 @@ import { CallToAction, PageIntro, ServiceCards } from '@/components/website/sect
 import { servicePillars } from '@/components/website/sections/ServicesSection';
 import { getServices } from '@/lib/supabase/public-data';
 import { Reveal } from '@/components/website/Motion';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Layanan Digital, Kreatif & Akademik | DigiJockeys',
+export const metadata = pageMetadata({
+  title: 'Layanan Digital, Kreatif & Akademik',
   description: 'Temukan solusi teknologi website, desain kreatif visual, dan pendampingan akademik terarah dalam satu tempat di DigiJockeys.',
-  keywords: ['jasa pembuatan website', 'desain grafis', 'bimbingan skripsi', 'analisis data spss', 'pitch deck', 'DigiJockeys'],
-};
+  path: '/services',
+  keywords: ['jasa pembuatan website', 'desain grafis', 'bimbingan skripsi', 'analisis data SPSS', 'pitch deck'],
+});
 
 export default async function ServicesPage() {
   const services = await getServices();

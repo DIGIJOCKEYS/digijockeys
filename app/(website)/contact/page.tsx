@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ArrowUpRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,12 +7,14 @@ import ContactSection from '@/components/website/sections/ContactSection';
 import { Reveal } from '@/components/website/Motion';
 import { getSiteSettings } from '@/lib/supabase/public-data';
 import { getWhatsAppUrl } from '@/lib/whatsapp';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Hubungi Kami | DigiJockeys Digital Studio',
+export const metadata = pageMetadata({
+  title: 'Hubungi Kami',
   description: 'Konsultasikan kebutuhan pembuatan website, desain grafis, dan pendampingan akademik bersama tim DigiJockeys.',
-  keywords: ['kontak DigiJockeys', 'konsultasi website', 'jasa skripsi surabaya', 'desain grafis'],
-};
+  path: '/contact',
+  keywords: ['kontak DigiJockeys', 'konsultasi website', 'konsultasi desain', 'kontak layanan digital'],
+});
 
 export default async function ContactPage() {
   const settings = await getSiteSettings();

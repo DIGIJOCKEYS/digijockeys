@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowDown, Check, Images, MessageSquareQuote, ShieldCheck, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,12 +7,14 @@ import ProofGallery from '@/components/website/sections/ProofGallery';
 import TestimonialForm from '@/components/website/sections/TestimonialForm';
 import { Reveal } from '@/components/website/Motion';
 import { getProofs, getServices, getTestimonials } from '@/lib/supabase/public-data';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Testimoni & Bukti Pengerjaan | DigiJockeys',
+export const metadata = pageMetadata({
+  title: 'Testimoni & Bukti Pengerjaan',
   description: 'Lihat dokumentasi bukti pengerjaan riil dan baca ulasan asli dari pelanggan DigiJockeys untuk layanan website, desain kreatif, dan akademik.',
-  keywords: ['testimoni DigiJockeys', 'bukti pengerjaan', 'ulasan jasa website', 'review bimbingan skripsi', 'portfolio bukti'],
-};
+  path: '/testimonials',
+  keywords: ['testimoni DigiJockeys', 'bukti pengerjaan', 'ulasan pelanggan', 'review layanan digital'],
+});
 
 export default async function TestimonialsPage() {
   const [reviews, services, proofs] = await Promise.all([getTestimonials(), getServices(), getProofs()]);

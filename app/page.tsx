@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Navbar from '@/components/website/layout/Navbar';
 import Footer from '@/components/website/layout/Footer';
@@ -14,25 +14,26 @@ import HomeProofsSection from '@/components/website/sections/HomeProofsSection';
 import FAQSection from '@/components/website/sections/FAQSection';
 import CTASection from '@/components/website/sections/CTASection';
 import { getProjects, getProofs, getServices, getSiteSettings, getTestimonials } from '@/lib/supabase/public-data';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'DIGI JOCKEYS — Digital Creative & Academic Solutions',
-  description: 'Digijockeys hadir membantu kebutuhan digital, kreatif, dan akademik melalui solusi yang dirancang secara profesional, praktis, dan sesuai kebutuhan Anda.',
-  keywords: [
-    'jasa pembuatan website',
-    'desain grafis',
-    'bimbingan skripsi',
-    'pendampingan thesis',
-    'analisis data',
-    'studio kreatif digital',
-    'DigiJockeys',
-  ],
-  openGraph: {
-    title: 'DIGI JOCKEYS — Digital Creative & Academic Solutions',
-    description: 'Solusi digital, kreatif, dan akademik dalam satu tempat.',
-    type: 'website',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings();
+  const title = settings.meta_title?.trim() || `${settings.business_name} | Jasa Website & Solusi Digital Kreatif`;
+  const description = settings.meta_description?.trim() || settings.description?.trim() || 'DigiJockeys membantu bisnis, individu, dan mahasiswa melalui layanan website, desain kreatif, dan pendampingan akademik.';
+  const metadata = pageMetadata({
+    title,
+    description,
+    path: '/',
+    keywords: settings.keywords.length ? settings.keywords : ['jasa pembuatan website', 'desain grafis', 'studio digital kreatif', 'DigiJockeys'],
+  });
+
+  return {
+    ...metadata,
+    title: { absolute: title },
+    openGraph: { ...metadata.openGraph, title, siteName: settings.business_name },
+    twitter: { ...metadata.twitter, title },
+  };
+}
 
 async function HomeContent() {
   const [settings, services, projects, reviews, proofs] = await Promise.all([

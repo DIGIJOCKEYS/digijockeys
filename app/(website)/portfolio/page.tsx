@@ -1,14 +1,14 @@
-import type { Metadata } from 'next';
 import { PageIntro } from '@/components/website/sections/ContentSections';
 import PortfolioGallery from '@/components/website/sections/PortfolioGallery';
 import { getProjects } from '@/lib/supabase/public-data';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Portofolio Karya & Proyek | DigiJockeys',
+export const metadata = pageMetadata({
+  title: 'Portofolio Karya & Proyek',
   description: 'Lihat beberapa proyek dan hasil pekerjaan yang telah kami kerjakan. Dari pengembangan website hingga desain kreatif, setiap karya merupakan bentuk komitmen kami terhadap kualitas.',
-  keywords: ['portofolio website', 'karya digital', 'project design', 'DigiJockeys', 'portofolio skripsi'],
-  openGraph: { title: 'Portofolio DigiJockeys', description: 'Setiap karya memiliki cerita dan tujuan.' },
-};
+  path: '/portfolio',
+  keywords: ['portofolio website', 'karya digital', 'project design', 'portofolio desain'],
+});
 
 export default async function PortfolioPage() {
   const projects = await getProjects();

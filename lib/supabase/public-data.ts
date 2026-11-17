@@ -17,11 +17,16 @@ export type SiteSettings = {
   phone_number: string | null;
   whatsapp: string | null;
   instagram: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  keywords: string[];
+  favicon_path: string | null;
 };
 
 export const defaultSettings: SiteSettings = {
   business_name: 'DigiJockeys', tagline: null, description: null, logo_path: '/logo.png',
   email: null, phone_number: null, whatsapp: null, instagram: null,
+  meta_title: null, meta_description: null, keywords: [], favicon_path: '/logo.png',
 };
 
 export { extractServiceName } from './client-utils';
@@ -36,9 +41,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   'use cache';
   cacheLife('seconds');
   if (!publicDb) return defaultSettings;
-  const { data } = await publicDb.from('site_settings').select('business_name,tagline,description,logo_path,email,phone_number,whatsapp,instagram').eq('id', 1).maybeSingle();
+  const { data } = await publicDb.from('site_settings').select('business_name,tagline,description,logo_path,favicon_path,email,phone_number,whatsapp,instagram,meta_title,meta_description,keywords').eq('id', 1).maybeSingle();
   const settings = { ...defaultSettings, ...(data ?? {}) };
-  return { ...settings, logo_path: mediaUrl(settings.logo_path) };
+  return { ...settings, logo_path: mediaUrl(settings.logo_path), favicon_path: mediaUrl(settings.favicon_path) };
 }
 
 export async function getServices() {

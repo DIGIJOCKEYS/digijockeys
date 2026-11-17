@@ -1,17 +1,9 @@
-import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
 import Navbar from '@/components/website/layout/Navbar';
 import Footer from '@/components/website/layout/Footer';
 import WhatsAppButton from '@/components/website/layout/WhatsAppButton';
 import { getSiteSettings } from '@/lib/supabase/public-data';
-
-export const metadata: Metadata = {
-  title: {
-    default: 'DigiJockeys',
-    template: '%s | DigiJockeys',
-  },
-};
 
 async function WebsiteChrome({
   children,

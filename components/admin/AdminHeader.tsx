@@ -92,12 +92,22 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
       const datePart = (type: Intl.DateTimeFormatPartTypes) => parts.find((part) => part.type === type)?.value;
       const todayStart = new Date(`${datePart('year')}-${datePart('month')}-${datePart('day')}T00:00:00+07:00`).toISOString();
       const { data, error } = await db.from('notifications').select('id,title,message,link,created_at,type,is_read').gte('created_at', todayStart).order('created_at', { ascending: false }).limit(30);
-      if (error) { console.error('Unable to load notifications:', error.message); return; }
+      if (error) {
+        console.error('Unable to load notifications:', error.message);
+        return;
+      }
       setNotifications((data ?? []) as Notification[]);
     };
     void load();
-    const channel = db.channel('admin-notifications').on('postgres_changes', { event: '*', schema: 'public', table: 'notifications' }, () => { void load(); }).subscribe();
-    return () => { void db.removeChannel(channel); };
+    const channel = db
+      .channel('admin-notifications')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'notifications' }, () => {
+        void load();
+      })
+      .subscribe();
+    return () => {
+      void db.removeChannel(channel);
+    };
   }, []);
 
   // ==========================================
@@ -108,7 +118,7 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
 
   const markAsRead = async (notification: Notification) => {
     if (!notification.is_read) {
-      setNotifications((current) => current.map((item) => item.id === notification.id ? { ...item, is_read: true } : item));
+      setNotifications((current) => current.map((item) => (item.id === notification.id ? { ...item, is_read: true } : item)));
       const { error } = await createClient().from('notifications').update({ is_read: true }).eq('id', notification.id);
       if (error) console.error('Unable to mark notification as read:', error.message);
     }
@@ -127,8 +137,10 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
     switch (type) {
       case 'review':
         return MessageSquareQuote;
-      case 'success': return CheckCircle2;
-      case 'warning': return TriangleAlert;
+      case 'success':
+        return CheckCircle2;
+      case 'warning':
+        return TriangleAlert;
 
       default:
         return Info;
@@ -174,12 +186,12 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
 
   const currentLanguage = {
     id: {
-      name: 'Indonesia',
+      name: 'ID',
       icon: '/icon/id.svg',
       label: 'Pilih Bahasa',
     },
     en: {
-      name: 'English',
+      name: 'ENG',
       icon: '/icon/eng.svg',
       label: 'Choose Language',
     },
@@ -359,7 +371,9 @@ export default function AdminHeader({ title = 'Dashboard', onMenuClick, profile 
 
         <DropdownMenu>
           <DropdownMenuTrigger render={<Button variant="ghost" className="h-auto gap-2 px-2 py-1.5 hover:bg-muted" />}>
-            <div className="flex size-9 items-center justify-center overflow-hidden rounded-full bg-primary text-sm font-semibold text-primary-foreground">{adminProfile.avatarUrl ? <Image src={adminProfile.avatarUrl} alt="Profile avatar" width={36} height={36} unoptimized className="size-full object-cover" /> : adminProfile.fullName.slice(0, 1).toUpperCase()}</div>
+            <div className="flex size-9 items-center justify-center overflow-hidden rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+              {adminProfile.avatarUrl ? <Image src={adminProfile.avatarUrl} alt="Profile avatar" width={36} height={36} unoptimized className="size-full object-cover" /> : adminProfile.fullName.slice(0, 1).toUpperCase()}
+            </div>
 
             <div className="hidden text-left sm:block">
               <p className="text-sm font-medium leading-tight">{adminProfile.fullName}</p>
