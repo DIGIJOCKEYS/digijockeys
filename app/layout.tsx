@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { cacheLife } from 'next/cache';
 import type { ReactNode } from 'react';
 
 import './globals.css';
@@ -8,12 +9,14 @@ import { getSiteSettings } from '@/lib/supabase/public-data';
 import { googleVerificationToken, siteUrl } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
+  'use cache';
+  cacheLife('minutes');
   const settings = await getSiteSettings();
   const title = settings.meta_title?.trim() || `${settings.business_name} | Jasa Website & Solusi Digital Kreatif`;
   const description = settings.meta_description?.trim() || settings.description?.trim() || 'DigiJockeys membantu bisnis, individu, dan mahasiswa melalui layanan website, desain kreatif, dan pendampingan akademik.';
 
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: siteUrl,
     title: { default: title, template: `%s | ${settings.business_name}` },
     description,
     keywords: settings.keywords,

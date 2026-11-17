@@ -1,4 +1,5 @@
 ﻿import type { Metadata } from 'next';
+import { cacheLife } from 'next/cache';
 import { Suspense } from 'react';
 import Navbar from '@/components/website/layout/Navbar';
 import Footer from '@/components/website/layout/Footer';
@@ -17,6 +18,8 @@ import { getProjects, getProofs, getServices, getSiteSettings, getTestimonials }
 import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
+  'use cache';
+  cacheLife('minutes');
   const settings = await getSiteSettings();
   const title = settings.meta_title?.trim() || `${settings.business_name} | Jasa Website & Solusi Digital Kreatif`;
   const description = settings.meta_description?.trim() || settings.description?.trim() || 'DigiJockeys membantu bisnis, individu, dan mahasiswa melalui layanan website, desain kreatif, dan pendampingan akademik.';
