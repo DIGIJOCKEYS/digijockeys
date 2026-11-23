@@ -293,6 +293,38 @@ button {
 ========================================= */
 
 /* Hero Glow */
+.hero-orb-drift {
+  animation: hero-orb-drift 18s ease-in-out infinite;
+}
+
+.hero-orb-drift-reverse {
+  animation: hero-orb-drift-reverse 22s ease-in-out infinite;
+}
+
+.hero-star {
+  animation: hero-star 3.5s ease-in-out infinite;
+}
+
+@keyframes hero-orb-drift {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+  35% { transform: translate3d(45px, -40px, 0) scale(1.15); }
+  70% { transform: translate3d(-30px, 30px, 0) scale(0.95); }
+}
+
+@keyframes hero-orb-drift-reverse {
+  0%,
+  100% { transform: translate3d(0, 0, 0) scale(1); }
+  35% { transform: translate3d(-50px, 50px, 0) scale(1.1); }
+  70% { transform: translate3d(40px, -35px, 0) scale(0.9); }
+}
+
+@keyframes hero-star {
+  0%,
+  100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+
 .hero-glow {
   animation: hero-glow 9s ease-in-out infinite alternate;
 }
@@ -330,45 +362,22 @@ button {
   }
 }
 
-/* =========================================
-   8. TESTIMONIAL INTERACTIONS
-========================================= */
-
-/*
-  Testimonial carousel menggunakan JavaScript
-  requestAnimationFrame untuk:
-  - Infinite horizontal scrolling
-  - Pause ketika mouse hover
-  - Drag menggunakan mouse
-  - Swipe menggunakan touch
-*/
-
-/* Horizontal drag support */
-.testimonial-viewport {
-  touch-action: pan-y;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
+.typing-caret {
+  height: 1em;
+  width: 2px;
+  vertical-align: -0.1em;
+  background: currentColor;
+  animation: typing-caret 0.8s steps(2, jump-none) infinite;
 }
 
-.testimonial-viewport:active {
-  cursor: grabbing;
-}
-
-.testimonial-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-.testimonial-group {
-  display: flex;
-  flex-shrink: 0;
+@keyframes typing-caret {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* =========================================
-   9. ACCESSIBILITY
+   8. ACCESSIBILITY
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -377,8 +386,16 @@ button {
   }
 
   .hero-glow,
-  .hero-orbit {
+  .hero-orbit,
+  .hero-orb-drift,
+  .hero-orb-drift-reverse,
+  .hero-star,
+  .typing-caret {
     animation: none !important;
+  }
+
+  .typing-caret {
+    visibility: hidden;
   }
 
   .website-motion :where(a, button, [role="button"], [data-slot="card"]) {
@@ -387,7 +404,7 @@ button {
 }
 
 /* =========================================
-   10. SHADCN BASE STYLES
+   9. SHADCN BASE STYLES
 ========================================= */
 
 @layer base {

@@ -15,28 +15,6 @@ type Proof = Awaited<ReturnType<typeof getProofs>>[number];
 
 const cardBase = 'border border-border/80 bg-card/85 shadow-sm backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:bg-card hover:shadow-xl hover:shadow-primary/5';
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  text,
-  align = 'center',
-}: {
-  eyebrow: string;
-  title: string;
-  text?: string | null;
-  align?: 'center' | 'left';
-}) {
-  return (
-    <Reveal className={`mb-12 max-w-3xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
-      <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.22em] text-primary">
-        {eyebrow}
-      </div>
-      <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">{title}</h2>
-      {text && <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{text}</p>}
-    </Reveal>
-  );
-}
-
 export function PageIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
     <header className="relative isolate overflow-hidden border-b border-border/70 bg-gradient-to-b from-background via-muted/30 to-background px-4 pb-16 pt-20 sm:px-6 sm:pb-24 sm:pt-28">
@@ -76,7 +54,6 @@ export function ServiceCards({ services }: { services: Service[] }) {
                   alt={service.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  unoptimized
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -95,7 +72,7 @@ export function ServiceCards({ services }: { services: Service[] }) {
             <CardHeader className="flex-1 gap-2 p-6 sm:p-7">
               <CardTitle className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">{service.name}</CardTitle>
               <CardDescription className="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
-                {service.description || 'Solusi yang dirancang profesional sesuai kebutuhan Anda.'}
+                  {service.description || 'Hubungi kami untuk detail layanan ini.'}
               </CardDescription>
             </CardHeader>
             <div className="border-t border-border/60 p-6 pt-0">
@@ -133,7 +110,6 @@ export function ProjectCards({ projects }: { projects: Project[] }) {
                     alt={`${project.project_name}, ${project.category}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    unoptimized
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -170,8 +146,8 @@ export function ReviewCards({ reviews }: { reviews: Review[] }) {
   if (!reviews || reviews.length === 0) {
     return (
       <div className="rounded-3xl border border-dashed border-border/80 bg-card/60 p-12 text-center text-muted-foreground">
-        <p className="font-semibold text-foreground">Belum ada ulasan yang dipublikasikan.</p>
-        <p className="mt-1 text-sm">Gunakan formulir di bawah untuk membagikan pengalaman Anda menggunakan layanan DigiJockeys.</p>
+        <p className="font-semibold text-foreground">Belum ada ulasan yang ditampilkan.</p>
+        <p className="mt-1 text-sm">Ulasan yang sudah ditinjau akan muncul di sini.</p>
       </div>
     );
   }
@@ -229,7 +205,6 @@ export function ProofCards({ proofs }: { proofs: Proof[] }) {
                 alt={proof.description || 'Dokumentasi pekerjaan pelanggan'}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
-                unoptimized
                 className="object-cover"
               />
             </div>
@@ -261,7 +236,7 @@ export function ContactDetails({ settings }: { settings: SiteSettings }) {
           <Card className={`${cardBase} rounded-2xl`}>
             <CardContent className="flex items-center gap-4 p-5">
               <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                {icon ? <Image src={icon} alt="" width={22} height={22} unoptimized /> : Icon && <Icon className="size-5" />}
+                {icon ? <Image src={icon} alt="" width={22} height={22} /> : Icon && <Icon className="size-5" />}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold text-muted-foreground">{label}</p>

@@ -1,68 +1,37 @@
 import Link from 'next/link';
-import { ArrowRight, Check, Code2, Palette, GraduationCap, Sparkles } from 'lucide-react';
+import { ArrowRight, Code2, Palette, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Reveal } from '@/components/website/Motion';
-import type { getServices } from '@/lib/supabase/public-data';
 
 export const servicePillars = [
   {
     key: 'digital-tech',
-    pillar: 'A. Digital & Technology',
-    tag: 'Web & Digital System',
+    pillar: 'Digital & teknologi',
+    tag: 'Website & sistem',
     icon: Code2,
-    tagline: 'Membangun pengalaman digital yang fungsional, modern, dan sesuai kebutuhan.',
+    tagline: 'Website dan sistem digital untuk kebutuhan bisnis maupun personal.',
     badgeColor: 'border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/10',
-    items: [
-      'Jasa Pembuatan Website',
-      'Website Company Profile',
-      'Website Bisnis & UMKM',
-      'Landing Page & Portfolio',
-      'Pengembangan Sistem Web',
-      'UI/UX Design',
-    ],
   },
   {
     key: 'creative-design',
-    pillar: 'B. Creative & Design',
-    tag: 'Visual & Branding',
+    pillar: 'Desain kreatif',
+    tag: 'Visual & konten',
     icon: Palette,
-    tagline: 'Mengubah ide menjadi visual yang menarik, komunikatif, dan profesional.',
+    tagline: 'Materi visual yang mendukung identitas dan komunikasi Anda.',
     badgeColor: 'border-teal-500/30 text-teal-600 dark:text-teal-400 bg-teal-500/10',
-    items: [
-      'Desain Grafis',
-      'Poster & Flyer',
-      'Banner & Konten Media Sosial',
-      'Desain Presentasi (PPT)',
-      'Infografis',
-      'CV & Portofolio',
-    ],
   },
   {
     key: 'academic-support',
-    pillar: 'C. Academic Support',
-    tag: 'Riset & Akademik',
+    pillar: 'Pendampingan akademik',
+    tag: 'Riset & penulisan',
     icon: GraduationCap,
-    tagline: 'Mendukung proses belajar dan penyelesaian kebutuhan akademik melalui pendampingan yang terarah.',
+    tagline: 'Dukungan untuk riset, analisis data, dan penyiapan dokumen akademik.',
     badgeColor: 'border-primary/30 text-primary bg-primary/10',
-    items: [
-      'Konsultasi Skripsi',
-      'Pendampingan Thesis',
-      'Konsultasi Proposal Penelitian',
-      'Pengolahan & Analisis Data',
-      'Editing dan Formatting Dokumen',
-      'Bimbingan Tugas Sekolah dan Kuliah',
-    ],
   },
 ];
 
-export default function ServicesSection({
-  services,
-  preview = false,
-}: {
-  services?: Awaited<ReturnType<typeof getServices>>;
-  preview?: boolean;
-}) {
+export default function ServicesSection() {
   return (
     <section id="services" className="relative isolate overflow-hidden scroll-mt-24 px-4 py-20 sm:px-6 sm:py-28 lg:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute -left-48 top-1/3 -z-10 size-[32rem] rounded-full bg-emerald-300/10 blur-[130px]" />
@@ -72,13 +41,13 @@ export default function ServicesSection({
         {/* Section Header */}
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.22em] text-primary">
-            WHAT WE OFFER
+            LAYANAN
           </div>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Satu Tempat untuk Berbagai Kebutuhan.
+            Tiga bidang, satu langkah awal.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Temukan layanan yang sesuai dengan kebutuhan Anda. Kami menyediakan solusi yang fleksibel, mulai dari teknologi digital hingga kebutuhan kreatif dan akademik.
+            Pilih bidang yang paling dekat dengan kebutuhan Anda untuk melihat katalog layanan.
           </p>
         </Reveal>
 
@@ -111,29 +80,15 @@ export default function ServicesSection({
                       </p>
                     </CardHeader>
 
-                    {/* Services Checklist */}
-                    <div className="mt-6 border-t border-border/70 pt-5">
-                      <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Layanan Termasuk:</p>
-                      <ul className="mt-3.5 space-y-2.5">
-                        {pillar.items.map((item) => (
-                          <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/85">
-                            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                              <Check className="size-3" />
-                            </span>
-                            <span className="font-medium">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
                   </div>
 
                   <div className="mt-8 border-t border-border/60 pt-5">
                     <Button
-                      render={<Link href="/contact" />}
+                      render={<Link href={`/services#${pillar.key}`} />}
                       variant="outline"
                       className="group/btn h-11 w-full rounded-xl border-border/80 bg-background/60 text-xs font-semibold hover:border-primary/50 hover:bg-primary hover:text-primary-foreground"
                     >
-                      <span>Konsultasikan Kategori Ini</span>
+                      <span>Jelajahi bidang ini</span>
                       <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
                     </Button>
                   </div>
@@ -150,7 +105,7 @@ export default function ServicesSection({
             size="lg"
             className="group h-13 rounded-2xl bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-lg"
           >
-            Lihat Semua Layanan
+            Lihat katalog layanan
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Button>
         </Reveal>

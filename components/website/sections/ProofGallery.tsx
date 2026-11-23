@@ -55,7 +55,6 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                     alt={proof.description || `Bukti pengerjaan ${serviceName}`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    unoptimized
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
@@ -136,7 +135,6 @@ export default function ProofGallery({ proofs = [] }: { proofs?: Proof[] }) {
                   alt={selectedProof.description || 'Bukti pengerjaan DigiJockeys'}
                   fill
                   sizes="(max-width: 900px) 100vw, 850px"
-                  unoptimized
                   className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                 />
                 <div className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full bg-black/75 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-md opacity-90 transition-opacity group-hover:opacity-100">

@@ -35,7 +35,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4 min-w-0">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shadow-sm transition-transform group-hover:scale-105">
-                  <Image src="/icon/whatsapp.svg" alt="" width={26} height={26} unoptimized />
+                  <Image src="/icon/whatsapp.svg" alt="" width={26} height={26} />
                 </span>
                 <div className="min-w-0">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
@@ -44,7 +44,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
                   <p className="truncate text-base font-bold text-foreground sm:text-lg">
                     {whatsappNumber}
                   </p>
-                  <p className="text-xs text-muted-foreground">Konsultasi cepat &amp; respon langsung</p>
+                  <p className="text-xs text-muted-foreground">Mulai percakapan di WhatsApp</p>
                 </div>
               </div>
               <Button
@@ -67,7 +67,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4 min-w-0">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-sm transition-transform group-hover:scale-105">
-                  <Image src="/icon/email.svg" alt="" width={26} height={26} unoptimized />
+                  <Image src="/icon/email.svg" alt="" width={26} height={26} />
                 </span>
                 <div className="min-w-0">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-primary">
@@ -76,7 +76,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
                   <p className="truncate text-base font-bold text-foreground sm:text-lg">
                     {settings.email}
                   </p>
-                  <p className="text-xs text-muted-foreground">Kirim brief, proposal, atau dokumen</p>
+                  <p className="text-xs text-muted-foreground">Kirim pertanyaan atau brief</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -120,7 +120,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-4 min-w-0">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-amber-500/15 via-rose-500/15 to-purple-500/15 text-rose-500 shadow-sm transition-transform group-hover:scale-105">
-                  <Image src="/icon/instagram.svg" alt="" width={26} height={26} unoptimized />
+                  <Image src="/icon/instagram.svg" alt="" width={26} height={26} />
                 </span>
                 <div className="min-w-0">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-rose-500">
@@ -129,7 +129,7 @@ export default function ContactSection({ settings }: { settings: SiteSettings })
                   <p className="truncate text-base font-bold text-foreground sm:text-lg">
                     {settings.instagram}
                   </p>
-                  <p className="text-xs text-muted-foreground">Kabar terbaru, portofolio &amp; edukasi</p>
+                  <p className="text-xs text-muted-foreground">Kunjungi profil DigiJockeys</p>
                 </div>
               </div>
               {instagramHref && (

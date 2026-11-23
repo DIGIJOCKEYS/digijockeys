@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.digijockeys.com').replace(/\/$/, '');
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://digijockeys.vercel.app').replace(/\/$/, '');
 export const googleVerificationToken = 'slnqBhkw2UGauEfaS5uK3vlUEoGPbI9RVU05LtA8E2o';
 
 export function pageMetadata({
@@ -19,21 +19,21 @@ export function pageMetadata({
     title,
     description,
     keywords,
-    alternates: { canonical: path },
+    alternates: { canonical: new URL(path, siteUrl).toString() },
     openGraph: {
       type: 'website',
       locale: 'id_ID',
       siteName: 'DigiJockeys',
       title: fullTitle,
       description,
-      url: path,
-      images: [{ url: '/logo.png', width: 512, height: 512, alt: 'DigiJockeys' }],
+      url: new URL(path, siteUrl).toString(),
+      images: [{ url: new URL('/logo.png', siteUrl).toString(), width: 512, height: 512, alt: 'DigiJockeys' }],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: ['/logo.png'],
+      images: [new URL('/logo.png', siteUrl).toString()],
     },
   };
 }

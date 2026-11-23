@@ -15,9 +15,9 @@ const quickLinks = [
 ];
 
 const serviceCategories = [
-  { label: 'Digital & Technology', href: '/services#digital-tech' },
-  { label: 'Creative & Design', href: '/services#creative-design' },
-  { label: 'Academic Support', href: '/services#academic-support' },
+  { label: 'Digital & Teknologi', href: '/services#digital-tech' },
+  { label: 'Desain Kreatif', href: '/services#creative-design' },
+  { label: 'Pendampingan Akademik', href: '/services#academic-support' },
 ];
 
 async function getCurrentYear() {
@@ -46,7 +46,6 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
                 alt={settings.business_name}
                 width={44}
                 height={44}
-                unoptimized
                 className="size-11 rounded-xl object-contain shadow-xs"
               />
               <div>
@@ -60,10 +59,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
               {settings.description ||
-                'Digijockeys hadir membantu kebutuhan digital, kreatif, dan akademik melalui solusi yang dirancang secara profesional, praktis, dan sesuai kebutuhan Anda.'}
-            </p>
-            <p className="mt-3 text-xs font-semibold text-primary">
-              Solusi digital, kreatif, dan akademik dalam satu tempat.
+                'Studio digital untuk bisnis, individu, dan mahasiswa.'}
             </p>
           </div>
 
@@ -103,7 +99,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
           <div>
             <p className="text-xs font-bold uppercase tracking-wider text-foreground">Hubungi Kami</p>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Konsultasikan ide Anda hari ini. Kami siap mendengar dan memberikan solusi terbaik.
+              Pilih kanal yang nyaman untuk menghubungi kami.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {settings.email && (
@@ -113,7 +109,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
                   size="sm"
                   className="rounded-xl border-border/80 text-xs font-semibold hover:border-primary hover:text-primary"
                 >
-                  <Image src="/icon/email.svg" alt="" width={16} height={16} unoptimized /> Email
+                  <Image src="/icon/email.svg" alt="" width={16} height={16} /> Email
                 </Button>
               )}
               {whatsapp && (
@@ -123,7 +119,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
                   size="sm"
                   className="rounded-xl border-border/80 text-xs font-semibold hover:border-primary hover:text-primary"
                 >
-                  <Image src="/icon/whatsapp.svg" alt="" width={16} height={16} unoptimized /> WhatsApp <ArrowUpRight className="size-3" />
+                  <Image src="/icon/whatsapp.svg" alt="" width={16} height={16} /> WhatsApp <ArrowUpRight className="size-3" />
                 </Button>
               )}
               {instagram && (
@@ -133,7 +129,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
                   size="sm"
                   className="rounded-xl border-border/80 text-xs font-semibold hover:border-primary hover:text-primary"
                 >
-                  <Image src="/icon/instagram.svg" alt="" width={16} height={16} unoptimized /> Instagram <ArrowUpRight className="size-3" />
+                  <Image src="/icon/instagram.svg" alt="" width={16} height={16} /> Instagram <ArrowUpRight className="size-3" />
                 </Button>
               )}
             </div>
@@ -143,7 +139,7 @@ export default async function Footer({ settings }: { settings: SiteSettings }) {
         {/* Footer bottom */}
         <div className="flex flex-col gap-3 pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {year} {settings.business_name || 'Digijockeys'}. Seluruh hak cipta dilindungi.</p>
-          <p className="font-medium text-foreground/80">Ide Anda, Solusi Kami. Wujudkan dengan Lebih Mudah.</p>
+          <p className="font-medium text-foreground/80">Ide Anda, Solusi Kami.</p>
         </div>
       </div>
     </footer>

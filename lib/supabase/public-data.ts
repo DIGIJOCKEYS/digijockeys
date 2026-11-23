@@ -25,7 +25,7 @@ export type SiteSettings = {
 
 export const defaultSettings: SiteSettings = {
   business_name: 'DigiJockeys', tagline: null, description: null, logo_path: '/logo.png',
-  email: null, phone_number: null, whatsapp: null, instagram: null,
+  email: 'digijockeys@gmail.com', phone_number: '082241826598', whatsapp: '6282241826598', instagram: 'https://www.instagram.com/digijockeys__/',
   meta_title: null, meta_description: null, keywords: [], favicon_path: '/logo.png',
 };
 
@@ -42,7 +42,14 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   cacheLife('seconds');
   if (!publicDb) return defaultSettings;
   const { data } = await publicDb.from('site_settings').select('business_name,tagline,description,logo_path,favicon_path,email,phone_number,whatsapp,instagram,meta_title,meta_description,keywords').eq('id', 1).maybeSingle();
-  const settings = { ...defaultSettings, ...(data ?? {}) };
+  const settings = {
+    ...defaultSettings,
+    ...(data ?? {}),
+    email: data?.email || defaultSettings.email,
+    phone_number: data?.phone_number || defaultSettings.phone_number,
+    whatsapp: data?.whatsapp || defaultSettings.whatsapp,
+    instagram: data?.instagram || defaultSettings.instagram,
+  };
   return { ...settings, logo_path: mediaUrl(settings.logo_path), favicon_path: mediaUrl(settings.favicon_path) };
 }
 

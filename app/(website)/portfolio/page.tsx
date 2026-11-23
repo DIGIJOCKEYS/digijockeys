@@ -4,10 +4,10 @@ import { getProjects } from '@/lib/supabase/public-data';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: 'Portofolio Karya & Proyek',
-  description: 'Lihat beberapa proyek dan hasil pekerjaan yang telah kami kerjakan. Dari pengembangan website hingga desain kreatif, setiap karya merupakan bentuk komitmen kami terhadap kualitas.',
+  title: 'Portofolio Website & Desain | DigiJockeys',
+  description: 'Lihat pilihan proyek website dan desain yang dikerjakan DigiJockeys untuk kebutuhan klien.',
   path: '/portfolio',
-  keywords: ['portofolio website', 'karya digital', 'project design', 'portofolio desain'],
+  keywords: ['portofolio website', 'portofolio desain', 'karya DigiJockeys'],
 });
 
 export default async function PortfolioPage() {
@@ -16,9 +16,9 @@ export default async function PortfolioPage() {
   return (
     <>
       <PageIntro
-        eyebrow="SELECTED WORKS"
-        title="Setiap Karya Memiliki Cerita dan Tujuan."
-        text="Lihat beberapa proyek dan hasil pekerjaan yang telah kami kerjakan. Dari pengembangan website hingga desain kreatif, setiap karya merupakan bentuk komitmen kami terhadap kualitas."
+        eyebrow="PORTOFOLIO"
+        title="Karya digital DigiJockeys"
+        text="Jelajahi proyek website dan desain yang telah dikerjakan untuk klien."
       />
 
       <section className="relative isolate px-4 py-12 sm:px-6 sm:py-20">

@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, Menu, X, Sparkles } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ThemeToggle from '@/components/shared/ThemeToggle';
 import type { SiteSettings } from '@/lib/supabase/public-data';
@@ -21,12 +21,13 @@ const links = [
 export default function Navbar({ settings }: { settings: SiteSettings }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.header
-      initial={{ y: -18, opacity: 0 }}
+      initial={false}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4"
     >
       <nav
@@ -39,7 +40,6 @@ export default function Navbar({ settings }: { settings: SiteSettings }) {
             alt={settings.business_name}
             width={40}
             height={40}
-            unoptimized
             priority
             className="size-10 shrink-0 rounded-xl object-contain shadow-xs"
           />
@@ -68,6 +68,7 @@ export default function Navbar({ settings }: { settings: SiteSettings }) {
                     ? 'bg-primary/10 text-primary hover:bg-primary/15'
                     : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'
                 }`}
+                aria-current={isActive ? 'page' : undefined}
               >
                 {link.label}
               </Button>
@@ -102,10 +103,10 @@ export default function Navbar({ settings }: { settings: SiteSettings }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            initial={reduceMotion ? false : { opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: reduceMotion ? 0 : 0.18 }}
             className="mx-auto mt-2 max-w-7xl rounded-2xl border border-border/80 bg-background/95 p-3.5 shadow-xl backdrop-blur-xl lg:hidden"
           >
             <div className="grid gap-1">
@@ -119,6 +120,7 @@ export default function Navbar({ settings }: { settings: SiteSettings }) {
                     className={`h-11 justify-start rounded-xl px-4 text-sm font-semibold ${
                       isActive ? 'bg-primary/10 text-primary' : 'text-muted-foreground'
                     }`}
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     {link.label}
                   </Button>

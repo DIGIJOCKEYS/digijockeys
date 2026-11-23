@@ -10,8 +10,8 @@ import { getProofs, getServices, getTestimonials } from '@/lib/supabase/public-d
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata = pageMetadata({
-  title: 'Testimoni & Bukti Pengerjaan',
-  description: 'Lihat dokumentasi bukti pengerjaan riil dan baca ulasan asli dari pelanggan DigiJockeys untuk layanan website, desain kreatif, dan akademik.',
+  title: 'Testimoni & Bukti Pengerjaan DigiJockeys',
+  description: 'Baca ulasan pelanggan dan lihat dokumentasi pekerjaan DigiJockeys.',
   path: '/testimonials',
   keywords: ['testimoni DigiJockeys', 'bukti pengerjaan', 'ulasan pelanggan', 'review layanan digital'],
 });
@@ -22,9 +22,9 @@ export default async function TestimonialsPage() {
   return (
     <>
       <PageIntro
-        eyebrow="CLIENT EXPERIENCES & PROOFS"
-        title="Kepercayaan Dibangun dari Bukti & Pengalaman Nyata."
-        text="Transparansi adalah prioritas kami. Bagikan pengalaman Anda, baca cerita pelanggan, dan lihat dokumentasi pengerjaan proyek DigiJockeys."
+        eyebrow="ULASAN & DOKUMENTASI"
+        title="Pengalaman pelanggan dan bukti kerja"
+        text="Baca ulasan pelanggan atau kirimkan pengalaman Anda. Dokumentasi pekerjaan tersedia di halaman ini."
       />
 
       <section id="bagikan-ulasan" className="scroll-mt-24 border-b border-border/70 bg-background px-4 py-16 sm:px-6 sm:py-24">
@@ -34,11 +34,11 @@ export default async function TestimonialsPage() {
               <MessageSquareQuote className="size-7" />
             </span>
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-primary">BAGIKAN CERITA ANDA</p>
-            <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl">Pengalaman Anda Sangat Berharga bagi Kami.</h2>
-            <p className="mt-4 max-w-lg leading-relaxed text-muted-foreground">Pernah menggunakan layanan website, desain kreatif, atau pendampingan akademik DigiJockeys? Berikan ulasan untuk membantu kami terus berkembang.</p>
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight text-foreground sm:text-4xl">Bagikan pengalaman Anda.</h2>
+            <p className="mt-4 max-w-lg leading-relaxed text-muted-foreground">Ulasan ditinjau sebelum ditampilkan di website.</p>
             <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-muted-foreground">
               <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-3.5 py-2 shadow-xs"><ShieldCheck className="size-4 text-emerald-600 dark:text-emerald-400" /> Ditinjau sebelum tayang</span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-3.5 py-2 shadow-xs"><Star className="size-4 fill-amber-500 text-amber-500" /> Penilaian 1–5 bintang</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-3.5 py-2 shadow-xs"><Star className="size-4 fill-amber-500 text-amber-500" /> Rating 1–5 bintang</span>
             </div>
             <Button render={<Link href="#hasil-testimoni" />} variant="ghost" className="mt-6 rounded-xl px-0 text-primary hover:bg-transparent hover:text-primary/80">
               Lihat hasil testimoni <ArrowDown className="size-4" />
@@ -48,8 +48,8 @@ export default async function TestimonialsPage() {
           <Reveal delay={0.1}>
             <Card className="overflow-hidden rounded-3xl border border-border/80 bg-card/90 shadow-xl backdrop-blur-md">
               <CardHeader className="border-b border-border/70 p-6 sm:p-8">
-                <CardTitle className="text-xl font-bold sm:text-2xl">Kirim Ulasan Pelanggan</CardTitle>
-                <CardDescription className="max-w-xl text-sm leading-relaxed">Isi formulir dengan pengalaman Anda. Ulasan akan diperiksa terlebih dahulu oleh tim kami sebelum ditampilkan.</CardDescription>
+                <CardTitle className="text-xl font-bold sm:text-2xl">Kirim ulasan</CardTitle>
+                <CardDescription className="max-w-xl text-sm leading-relaxed">Ceritakan pengalaman Anda menggunakan layanan DigiJockeys.</CardDescription>
               </CardHeader>
               <CardContent className="p-6 sm:p-8">
                 <TestimonialForm services={services.map(({ id, name }) => ({ id, name }))} />
@@ -66,9 +66,8 @@ export default async function TestimonialsPage() {
           <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary"><Star className="size-3.5 fill-amber-500 text-amber-500" /> ULASAN PELANGGAN</div>
-              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl">Cerita dari Klien Kami</h2>
+              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl">Ulasan pelanggan</h2>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Setiap ulasan datang dari pengalaman nyata bekerja sama dengan tim DigiJockeys.</p>
           </div>
           <ReviewCards reviews={reviews} />
         </div>
@@ -80,9 +79,8 @@ export default async function TestimonialsPage() {
           <div className="mb-10 flex flex-col gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary"><Images className="size-3.5" /> DOKUMENTASI PROYEK</div>
-              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl">Bukti Pengerjaan &amp; Serah Terima</h2>
+              <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl">Bukti pengerjaan</h2>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">Klik kartu untuk melihat gambar resolusi penuh, rincian pengerjaan, dan catatan verifikasi proyek.</p>
           </div>
           <ProofGallery proofs={proofs} />
         </div>

@@ -108,7 +108,6 @@ export default function PortfolioGallery({ projects = [] }: { projects?: Project
                       alt={`${project.project_name}, ${project.category}`}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -206,7 +205,6 @@ export default function PortfolioGallery({ projects = [] }: { projects?: Project
                       alt={selected.project_name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md opacity-90 transition-opacity group-hover:opacity-100">
@@ -230,7 +228,6 @@ export default function PortfolioGallery({ projects = [] }: { projects?: Project
                       alt={image.alt_text || selected.project_name}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      unoptimized
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1 rounded-full bg-black/75 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md opacity-90 transition-opacity group-hover:opacity-100">

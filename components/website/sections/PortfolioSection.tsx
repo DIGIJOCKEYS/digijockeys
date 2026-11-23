@@ -18,18 +18,18 @@ export default function PortfolioSection({
       <div className="mx-auto max-w-7xl">
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.22em] text-primary">
-            SELECTED WORKS
+            PORTOFOLIO
           </div>
           <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-            Setiap Karya Memiliki Cerita dan Tujuan.
+            Beberapa karya pilihan.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Lihat beberapa proyek dan hasil pekerjaan yang telah kami kerjakan. Dari pengembangan website hingga desain kreatif, setiap karya merupakan bentuk komitmen kami terhadap kualitas.
+            Proyek website dan desain yang dikerjakan untuk kebutuhan klien.
           </p>
         </Reveal>
 
         <div className="mt-14">
-          <ProjectCards projects={projects.slice(0, 6)} />
+          <ProjectCards projects={projects.slice(0, 4)} />
         </div>
 
         <Reveal delay={0.2} className="mt-12 text-center">
@@ -38,7 +38,7 @@ export default function PortfolioSection({
             size="lg"
             className="group h-13 rounded-2xl bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/95 hover:shadow-lg"
           >
-            Jelajahi Portofolio
+            Lihat semua karya
             <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Button>
         </Reveal>
